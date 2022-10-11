@@ -1,6 +1,37 @@
-td {
-    border: 1px solid black;
-    width: 20px;
-    height: 20px;
-    text-align: center;
+#wrap {
+	display: flex;
+	position: absolute;
+	left: 50%;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	margin-top: 80px;
+	padding: 15px;
+	border-radius: 6px;
+	width: 473px;
+	height: 473px;
+	background-color: rgb(187, 173, 160);
+	transform: translate(-50%);
+}
+.row-wrap {
+	display: flex;
+}
+span {
+	margin-right: 15px;
+	margin-bottom: 15px;
+	border-radius: 3px;
+	width: 107px;
+	height: 107px;
+	background-color: rgb(246, 150, 100);
+	line-height: 107px;
+	text-align: center;
+	font-weight: 700;
+	font-size: 55px;
+	color: white;
+}
+span:nth-of-type(4),
+span:nth-of-type(8),
+span:nth-of-type(12),
+span:nth-of-type(16) {
+	margin-right: 0;
 }

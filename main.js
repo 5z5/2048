@@ -25,12 +25,29 @@ window.onload = (event) => {
     function getXY() {
       let x = getOneToThree();
       let y = getOneToThree();
-      while (blockData[x][y] !== 0) {
-        x = getOneToThree();
-        y = getOneToThree();
+      let judge = 0;
+      for (let i=0;i<4;i++) {
+        for (let j=0;j<4;j++) {
+          if (blockData[i][j] === 0) {
+            judge = 1;
+            break;
+          }
+        }
+        if (judge) {
+          break;
+        }
+      }
+      if (judge) {
+        while (blockData[x][y] !== 0) {
+          x = getOneToThree();
+          y = getOneToThree();
+        }
+      } else {
+        alert('游戏失败!!!')
+        return ;
       }
       
-      return [x, y]
+      return [x, y];
     }
 
     // 在一个随机一个空格子中出现2或4
@@ -62,7 +79,7 @@ window.onload = (event) => {
     // 创建出4*4的二维数组对应页面中的24个格子,全局变量
     let blockData = [];
     // 获取24个方块的位置
-    let tds = document.getElementsByTagName('td');
+    let tds = document.getElementsByTagName('span');
 
     initData()
     appearNumberInGrid();
@@ -190,10 +207,6 @@ window.onload = (event) => {
         }
       }
       appearNumberInGrid();
-    }
-
-    function blockNumAppear() {
-      let blockNum = getRandomNum();
     }
 
     /**
