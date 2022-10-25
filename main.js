@@ -60,6 +60,8 @@ window.onload = (event) => {
       let area = x*4+y; 
       // 把随机数显示到页面对应16个格子的具体位置
       tds[area].innerText = blockNum;
+      tds[area].style.backgroundColor = 'rgb(246, 150, 100)';
+      tds[area].style.animation = 'pop 200ms ease 100ms';
       // 将随机数根据x、y坐标记录到创建出的4*4的二维数组
       blockData[x][y] = blockNum;
     }
@@ -93,12 +95,20 @@ window.onload = (event) => {
           blockData[row][i+1] = 0;
           tds[row*4+i+1].innerText = '';
           tds[row*4+i].innerText = blockData[row][i];
+          tds[row*4+i+1].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
+          tds[row*4+i].style.animation = '';
+          tds[row*4+i].style.backgroundColor = 'rgb(246, 150, 100)';
+          tds[row*4+i].style.animation = 'pop 200ms ease 100ms';
         } else {
           if (blockData[row][i] === blockData[row][i+1]) {
             blockData[row][i] *= 2;
             blockData[row][i+1] = 0;
             tds[row*4+i+1].innerText = '';
             tds[row*4+i].innerText = blockData[row][i];
+            tds[row*4+i+1].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
+            tds[row*4+i].style.animation = '';
+            tds[row*4+i].style.backgroundColor = 'rgb(246, 150, 100)';
+            tds[row*4+i].style.animation = 'pop 200ms ease 100ms';
           }
         }
       }
@@ -125,12 +135,16 @@ window.onload = (event) => {
           blockData[row][i-1] = 0;
           tds[row*4+i-1].innerText = '';
           tds[row*4+i].innerText = blockData[row][i];
+          tds[row*4+i-1].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
+          tds[row*4+i].style.backgroundColor = 'rgb(246, 150, 100)';
         } else {
           if (blockData[row][i] === blockData[row][i+1]) {
             blockData[row][i] *= 2;
             blockData[row][i-1] = 0;
             tds[row*4+i-1].innerText = '';
             tds[row*4+i].innerText = blockData[row][i];
+            tds[row*4+i-1].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
+            tds[row*4+i].style.backgroundColor = 'rgb(246, 150, 100)';
           }
         }
       }
@@ -156,12 +170,16 @@ window.onload = (event) => {
           blockData[i+1][col] = 0;
           tds[(i+1)*4 + col].innerText = '';
           tds[i*4 + col].innerText = blockData[i][col];
+          tds[(i+1)*4 + col].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
+          tds[i*4 + col].style.backgroundColor = 'rgb(246, 150, 100)';
         } else {
           if (blockData[i][col] === blockData[i+1][col]) {
             blockData[i][col] *= 2;
             blockData[i+1][col] = 0;
             tds[(i+1)*4 + col].innerText = '';
             tds[i*4 + col].innerText = blockData[i][col];
+            tds[(i+1)*4 + col].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
+            tds[i*4 + col].style.backgroundColor = 'rgb(246, 150, 100)';
           }
         }
       }
@@ -186,12 +204,16 @@ window.onload = (event) => {
           blockData[i-1][col] = 0;
           tds[(i-1)*4+col].innerText = '';
           tds[i*4+col].innerText = blockData[i][col];
+          tds[(i-1)*4+col].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
+          tds[i*4+col].style.backgroundColor = 'rgb(246, 150, 100)';
         } else {
           if (blockData[i][col] === blockData[i-1][col]) {
             blockData[i][col] *= 2;
             blockData[i-1][col] = 0;
             tds[(i-1)*4+col].innerText = '';
             tds[i*4+col].innerText = blockData[i][col];
+            tds[(i-1)*4+col].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
+            tds[i*4+col].style.backgroundColor = 'rgb(246, 150, 100)';
           }
         }
       }
