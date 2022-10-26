@@ -3,8 +3,6 @@
 	position: absolute;
 	left: 50%;
 	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
 	margin-top: 80px;
 	padding: 15px;
 	border-radius: 6px;
@@ -22,7 +20,7 @@ span {
 	border-radius: 3px;
 	width: 107px;
 	height: 107px;
-	background-color: rgba(238, 228, 218, 0.35);
+	background-color: rgba(238, 228, 218, .35);
 	line-height: 107px;
 	text-align: center;
 	font-weight: 700;
@@ -34,4 +32,60 @@ span:nth-of-type(8),
 span:nth-of-type(12),
 span:nth-of-type(16) {
 	margin-right: 0;
+}
+.cell-1-1 {
+	transform: translate(0, 0);
+}
+.cell-1-2 {
+	transform: translate(122px, 0);
+}
+.cell-1-3 {
+	transform: translate(244px, 0);
+
+}
+.cell-1-4 {
+	transform: translate(366px, 0);
+}
+.cell-2-1 {
+	transform: translate(0, 122px);
+}
+.cell-2-2 {
+	transform: translate(122px, 122px);
+}
+.cell-2-3 {
+	transform: translate(244px, 122px);
+}
+.cell-2-4 {
+	transform: translate(366px, 122px);
+}
+.cell-3-1 {
+	transform: translate(0, 244px);
+}
+.cell-3-2 {
+	transform: translate(122px, 244px);
+}
+.cell-3-3 {
+	transform: translate(244px, 244px);
+}
+.cell-3-4 {
+	transform: translate(366px, 244px);
+}
+.cell-4-1 {
+	transform: translate(0, 366px);
+}
+.cell-4-2 {
+	transform: translate(122px, 366px);
+}
+.cell-4-3 {
+	transform: translate(244px, 366px);
+}
+.cell-4-4 {
+	transform: translate(366px, 366px);
+}
+
+span.cell {
+	position: absolute;
+	transition-property: transform;
+	transition-duration: 100ms;
+	transition-timing-function: ease-in-out;
 }

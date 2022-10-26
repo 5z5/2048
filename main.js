@@ -57,11 +57,16 @@ window.onload = (event) => {
       // 得到坐标
       let [x, y] = getXY();
       // 将坐标定位到数组具体的位置
-      let area = x*4+y; 
+      let positionClass = 'cell-'.concat(x+1).concat('-').concat(y+1);
       // 把随机数显示到页面对应16个格子的具体位置
-      tds[area].innerText = blockNum;
-      tds[area].style.backgroundColor = 'rgb(246, 150, 100)';
-      tds[area].style.animation = 'pop 200ms ease 100ms';
+      let span = document.createElement('span');
+      span.innerText = blockNum;
+      span.classList.add('cell');
+      span.classList.add(positionClass);
+      span.style.backgroundColor = 'rgb(246, 150, 100)';
+      document.getElementById('wrap').append(span);
+      // tds[area].innerText = blockNum;
+      // tds[area].style.backgroundColor = 'rgb(246, 150, 100)';
       // 将随机数根据x、y坐标记录到创建出的4*4的二维数组
       blockData[x][y] = blockNum;
     }
@@ -89,26 +94,29 @@ window.onload = (event) => {
 
     // 将数字向左移动 
     function leftMove(row, col) {
+      let positionClass = 'cell-'.concat(row+1).concat('-').concat(col+1);
+      let span = document.getElementsByClassName(positionClass)[0];
+      let nowPosition;
+      let recSpan;
       for (let i=col-1;i>-1;i--) {
+        nowPosition = 'cell-'.concat(row+1).concat('-').concat(i+1);
         if (blockData[row][i] === 0) {
           blockData[row][i] = blockData[row][i+1];
           blockData[row][i+1] = 0;
-          tds[row*4+i+1].innerText = '';
-          tds[row*4+i].innerText = blockData[row][i];
-          tds[row*4+i+1].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
-          tds[row*4+i].style.animation = '';
-          tds[row*4+i].style.backgroundColor = 'rgb(246, 150, 100)';
-          tds[row*4+i].style.animation = 'pop 200ms ease 100ms';
+          span.classList.remove(positionClass);
+          span.classList.add(nowPosition);
+          positionClass = nowPosition;
         } else {
           if (blockData[row][i] === blockData[row][i+1]) {
             blockData[row][i] *= 2;
             blockData[row][i+1] = 0;
-            tds[row*4+i+1].innerText = '';
-            tds[row*4+i].innerText = blockData[row][i];
-            tds[row*4+i+1].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
-            tds[row*4+i].style.animation = '';
-            tds[row*4+i].style.backgroundColor = 'rgb(246, 150, 100)';
-            tds[row*4+i].style.animation = 'pop 200ms ease 100ms';
+            recSpan = document.getElementsByClassName(nowPosition)[0];
+            span.classList.remove(positionClass);
+            span.classList.add(nowPosition);
+            span.remove();
+            recSpan.innerText = blockData[row][i];
+            positionClass = nowPosition;
+            span = recSpan;
           }
         }
       }
@@ -129,22 +137,29 @@ window.onload = (event) => {
 
     // 将数字往右移动
     function rightMove(row, col) {
+      let positionClass = 'cell-'.concat(row+1).concat('-').concat(col+1);
+      let span = document.getElementsByClassName(positionClass)[0];
+      let nowPosition;
+      let recSpan;
       for (let i=col+1;i<4;i++) {
+        nowPosition = 'cell-'.concat(row+1).concat('-').concat(i+1);
         if (blockData[row][i] === 0) {
           blockData[row][i] = blockData[row][i-1];
           blockData[row][i-1] = 0;
-          tds[row*4+i-1].innerText = '';
-          tds[row*4+i].innerText = blockData[row][i];
-          tds[row*4+i-1].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
-          tds[row*4+i].style.backgroundColor = 'rgb(246, 150, 100)';
+          span.classList.remove(positionClass);
+          span.classList.add(nowPosition);
+          positionClass = nowPosition;
         } else {
           if (blockData[row][i] === blockData[row][i+1]) {
             blockData[row][i] *= 2;
             blockData[row][i-1] = 0;
-            tds[row*4+i-1].innerText = '';
-            tds[row*4+i].innerText = blockData[row][i];
-            tds[row*4+i-1].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
-            tds[row*4+i].style.backgroundColor = 'rgb(246, 150, 100)';
+            recSpan = document.getElementsByClassName(nowPosition)[0];
+            span.classList.remove(positionClass);
+            span.classList.add(nowPosition);
+            span.remove();
+            recSpan.innerText = blockData[row][i];
+            positionClass = nowPosition;
+            span = recSpan;
           }
         }
       }
@@ -164,22 +179,29 @@ window.onload = (event) => {
 
 
     function upMove (row, col) {
+      let positionClass = 'cell-'.concat(row+1).concat('-').concat(col+1);
+      let span = document.getElementsByClassName(positionClass)[0];
+      let nowPosition;
+      let recSpan;
       for (let i=row-1;i>-1;i--) {
+        nowPosition = 'cell-'.concat(i+1).concat('-').concat(col+1);
         if (blockData[i][col] === 0) {
           blockData[i][col] = blockData[i+1][col];
           blockData[i+1][col] = 0;
-          tds[(i+1)*4 + col].innerText = '';
-          tds[i*4 + col].innerText = blockData[i][col];
-          tds[(i+1)*4 + col].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
-          tds[i*4 + col].style.backgroundColor = 'rgb(246, 150, 100)';
+          span.classList.remove(positionClass);
+          span.classList.add(nowPosition);
+          positionClass = nowPosition;
         } else {
           if (blockData[i][col] === blockData[i+1][col]) {
             blockData[i][col] *= 2;
             blockData[i+1][col] = 0;
-            tds[(i+1)*4 + col].innerText = '';
-            tds[i*4 + col].innerText = blockData[i][col];
-            tds[(i+1)*4 + col].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
-            tds[i*4 + col].style.backgroundColor = 'rgb(246, 150, 100)';
+            recSpan = document.getElementsByClassName(nowPosition)[0];
+            span.classList.remove(positionClass);
+            span.classList.add(nowPosition);
+            span.remove();
+            recSpan.innerText = blockData[i][col];
+            positionClass = nowPosition;
+            span = recSpan;
           }
         }
       }
@@ -198,22 +220,29 @@ window.onload = (event) => {
     }
 
     function downMove(row, col) {
+      let positionClass = 'cell-'.concat(row+1).concat('-').concat(col+1);
+      let span = document.getElementsByClassName(positionClass)[0];
+      let nowPosition;
+      let recSpan;
       for (let i=row+1;i<4;i++) {
+        nowPosition = 'cell-'.concat(i+1).concat('-').concat(col+1);
         if (blockData[i][col] === 0) {
           blockData[i][col] = blockData[i-1][col];
           blockData[i-1][col] = 0;
-          tds[(i-1)*4+col].innerText = '';
-          tds[i*4+col].innerText = blockData[i][col];
-          tds[(i-1)*4+col].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
-          tds[i*4+col].style.backgroundColor = 'rgb(246, 150, 100)';
+          span.classList.remove(positionClass);
+          span.classList.add(nowPosition);
+          positionClass = nowPosition;
         } else {
           if (blockData[i][col] === blockData[i-1][col]) {
             blockData[i][col] *= 2;
             blockData[i-1][col] = 0;
-            tds[(i-1)*4+col].innerText = '';
-            tds[i*4+col].innerText = blockData[i][col];
-            tds[(i-1)*4+col].style.backgroundColor = 'rgba(238, 228, 218, 0.35)';
-            tds[i*4+col].style.backgroundColor = 'rgb(246, 150, 100)';
+            recSpan = document.getElementsByClassName(nowPosition)[0];
+            span.classList.remove(positionClass);
+            span.classList.add(nowPosition);
+            span.remove();
+            recSpan.innerText = blockData[i][col];
+            positionClass = nowPosition;
+            span = recSpan;
           }
         }
       }
