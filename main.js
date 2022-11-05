@@ -60,14 +60,17 @@ window.onload = (event) => {
       let positionClass = 'cell-'.concat(x+1).concat('-').concat(y+1);
       // 把随机数显示到页面对应16个格子的具体位置
       let span = document.createElement('span');
-      span.innerText = blockNum;
-      span.classList.add('cell');
-      span.classList.add(positionClass);
-      span.style.backgroundColor = 'rgb(246, 150, 100)';
+      let innerSpan = document.createElement('span');
+      let recClass = [];
+      // 给外部的span加类
+      recClass.push(positionClass);
+      recClass.push('cell');
+      span.setAttribute('class', recClass.join(' '));
+      innerSpan.innerText = blockNum;
+      innerSpan.setAttribute('class', 'block')
+      innerSpan.style.backgroundColor = 'rgb(246, 150, 100)';
       document.getElementById('wrap').append(span);
-      // tds[area].innerText = blockNum;
-      // tds[area].style.backgroundColor = 'rgb(246, 150, 100)';
-      // 将随机数根据x、y坐标记录到创建出的4*4的二维数组
+      span.appendChild(innerSpan);
       blockData[x][y] = blockNum;
     }
 
@@ -114,7 +117,7 @@ window.onload = (event) => {
             span.classList.remove(positionClass);
             span.classList.add(nowPosition);
             span.remove();
-            recSpan.innerText = blockData[row][i];
+            recSpan.firstChild.innerText = blockData[row][i];
             positionClass = nowPosition;
             span = recSpan;
           }
@@ -150,14 +153,15 @@ window.onload = (event) => {
           span.classList.add(nowPosition);
           positionClass = nowPosition;
         } else {
-          if (blockData[row][i] === blockData[row][i+1]) {
+          if (blockData[row][i] === blockData[row][i-1]) {
             blockData[row][i] *= 2;
             blockData[row][i-1] = 0;
             recSpan = document.getElementsByClassName(nowPosition)[0];
             span.classList.remove(positionClass);
             span.classList.add(nowPosition);
             span.remove();
-            recSpan.innerText = blockData[row][i];
+            recSpan.firstChild.innerText = blockData[row][i];
+            recSpan.firstChild.classList.add('block-merged');
             positionClass = nowPosition;
             span = recSpan;
           }
@@ -199,7 +203,7 @@ window.onload = (event) => {
             span.classList.remove(positionClass);
             span.classList.add(nowPosition);
             span.remove();
-            recSpan.innerText = blockData[i][col];
+            recSpan.firstChild.innerText = blockData[i][col];
             positionClass = nowPosition;
             span = recSpan;
           }
@@ -240,7 +244,7 @@ window.onload = (event) => {
             span.classList.remove(positionClass);
             span.classList.add(nowPosition);
             span.remove();
-            recSpan.innerText = blockData[i][col];
+            recSpan.firstChild.innerText = blockData[i][col];
             positionClass = nowPosition;
             span = recSpan;
           }

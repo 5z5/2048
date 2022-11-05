@@ -89,3 +89,44 @@ span.cell {
 	transition-duration: 100ms;
 	transition-timing-function: ease-in-out;
 }
+
+/* 动画 */
+@keyframes appear {
+	0% {
+		transform: scale(0);
+		opacity: 0;
+	}
+
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+/* 合并时展示的动画 */
+@keyframes pop {
+	0% {
+		transform: scale(0);
+	}
+
+	50% {
+		transform: scale(1.2);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+.block {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	animation: appear 200ms ease 100ms;
+	animation-fill-mode: backwards;
+}
+
+.block-merged {
+	animation: pop 200ms ease 100ms;
+	animation-fill-mode: backwards;
+}
